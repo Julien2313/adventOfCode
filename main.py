@@ -23,6 +23,7 @@ DAY1STRING = "951344679963668529792964668968299711431673344545153453235177853425
 
 def day2_():
     tot = 0
+    oldTot = 0
     for line in DAY2STRING.splitlines():
         numbers = line.split('\t')
         for i in xrange(0, len(numbers)):
@@ -31,8 +32,13 @@ def day2_():
                 n2 = int(numbers[j])
                 if n1 % n2 == 0:
                     tot = tot + (n1 / n2)
+                    break
                 if n2 % n1 == 0:
                     tot = tot + (n2 / n1)
+                    break
+            if oldTot <> tot:
+                oldTot = tot
+                break
     return tot
 
 def day2():
@@ -69,4 +75,4 @@ def day1():
 
     return tot
 
-print day1()
+print day2_()
