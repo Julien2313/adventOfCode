@@ -2750,8 +2750,7 @@ spjb xkkak anuvk ejoklh nyerw bsjp zxuq vcwitnd xxtjmjg zfgq xkpf
 juo pmiyoh xxk myphio ogfyf dovlmwm moevao qqxidn
 """
 
-#DAY3INPUT = 265149
-DAY3INPUT = 12
+DAY3INPUT = 265149
 
 DAY2INPUT = """5806	6444	1281	38	267	1835	223	4912	5995	230	4395	2986	6048	4719	216	1201
 74	127	226	84	174	280	94	159	198	305	124	106	205	99	177	294
@@ -2821,7 +2820,6 @@ def day8_():
 
     print maxi
 
-
 def day8():
     dicRegister = {}
     tabInstructs = []
@@ -2869,9 +2867,6 @@ def day8():
             maxi = value[1]
 
     print maxi
-
-
-
 
 def day7_CalculateWeight(tabProgs, indexFather):
     indexSon = []
@@ -2929,8 +2924,6 @@ def day7_():
     day7_CalculateWeight(tabProgs, indexTop)
     day7_CheckWeight(tabProgs, indexTop)
 
-
-
 def day7():
     tabProgs = []
     for prog in DAY7INPUT.splitlines():
@@ -2967,7 +2960,6 @@ def day7():
         else:
             name = newName
 
-
 def day6_():
     rayInput = DAY5INPUT
     input = []
@@ -2992,7 +2984,6 @@ def day6_():
             else:
                 input[index] = input[index] + 1
 
-
 def day6():
     rayInput = DAY5INPUT
     input = []
@@ -3016,7 +3007,6 @@ def day6():
                 maxi = sys.maxint
             else:
                 input[index] = input[index] + 1
-
 
 def day4_():
     tot = 0
@@ -3047,57 +3037,56 @@ def day4():
                 wordsChecked.append(word)
     return tot
 
-def day3_(): #not done
-    DROITE      = 0
-    HAUT        = 1
-    GAUCHE      = 2
-    BAS         = 3
+def day3_ChangeDirection():
+    
+    day3_ChangeDirection.counter = (day3_ChangeDirection.counter + 1) % 4
+    counter = day3_ChangeDirection.counter
+    
+    if counter == 0:#bas
+        #~ print "bas"
+        return (0, -1)        
+    elif counter == 1:# droite
+        #~ print "droite"
+        return (1, 0)
+    elif counter == 2:# haut
+        #~ print "haut"
+        return (0, 1)    
+    else:# gauche
+        #~ print "gauche"
+        return (-1, 0)
+            
+day3_ChangeDirection.counter = 1
 
-    direction = DROITE
+def day3_(): #not done
     width = 1
     while True:
         if width * width >= DAY3INPUT:
             break
         else:
-            width = width + 2
-#    width = width + 6
+            width += 2
+    width += 2
+
     matrix = [[0 for x in xrange(0, width)] for y in xrange(0, width)]
     x, y = width/2, width/2
+    deltaX = 0
+    deltaY = 0
+    matrix[x][y] = 1
+    x += 1
+    
+    cpt = 1
+    while cpt < 10:
+        for twoTimes in xrange(0, 2):
+            for cptTimes in xrange(0, cpt):
+                matrix[x][y] = matrix[x+1][y] + matrix[x+1][y+1] + matrix[x-1][y+1] + matrix[x-1][y-1] + matrix[x][y-1] + matrix[x][y+1] + matrix[x-1][y] + matrix[x+1][y-1]
 
-    while True:
-        matrix[x][y] = matrix[x+1][y] + matrix[x+1][y+1] + matrix[x-1][y+1] + matrix[x-1][y-1] + matrix[x][y-1] + matrix[x][y+1] + matrix[x-1][y] + matrix[x+1][y-1]
-        if matrix[x][y] == 0:
-            matrix[x][y] = 1
-#        print matrix[x+1][y], matrix[x+1][y+1], matrix[x-1][y+1], matrix[x-1][y-1], matrix[x][y-1], matrix[x][y+1],  matrix[x-1][y], matrix[x+1][y-1]
-#        print matrix[x][y], x, y
-#        print " "
-        if direction == DROITE:
-            x = x + 1
-            if matrix[x - 1][y + 1] == 0:
-                direction = HAUT
-                print "BAS"
-        elif direction == HAUT:
-            y = y + 1
-            if matrix[x - 1][y + 1] == 0:
-                direction = GAUCHE
-                print "DROITE"
-        elif direction == GAUCHE:
-            x = x - 1
-            if matrix[x - 1][y + 1] == 0:
-                direction = BAS
-                print "HAUT"
-        else:
-            y = y - 1
-            if matrix[x - 1][y + 1] == 0:
-                direction = DROITE
-                print "GAUCHE"
-        for i in matrix:
-            for j in i:
-                print j,
-            print
-        print x, y
-        if matrix[x][y] > DAY3INPUT:
-            return matrix[x][y]
+                    
+                if matrix[x][y] > DAY3INPUT:
+                    return matrix[x][y]
+                x += deltaX
+                y += deltaY
+                    
+            deltaX, deltaY = day3_ChangeDirection()
+        cpt = cpt + 1
 
 
 def day3():
@@ -3169,4 +3158,4 @@ def day1():
 
     return tot
 
-print day8_()
+print day3_()
