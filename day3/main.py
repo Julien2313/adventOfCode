@@ -1,5 +1,3 @@
-DAY3INPUT = 265149
-
 
 def day3_ChangeDirection():
     
@@ -24,7 +22,7 @@ day3_ChangeDirection.counter = 1
 def p2(): #not done
     width = 1
     while True:
-        if width * width >= DAY3INPUT:
+        if width * width >= day3InputInt:
             break
         else:
             width += 2
@@ -44,7 +42,7 @@ def p2(): #not done
                 matrix[x][y] = matrix[x+1][y] + matrix[x+1][y+1] + matrix[x-1][y+1] + matrix[x-1][y-1] + matrix[x][y-1] + matrix[x][y+1] + matrix[x-1][y] + matrix[x+1][y-1]
 
                     
-                if matrix[x][y] > DAY3INPUT:
+                if matrix[x][y] > day3InputInt:
                     return matrix[x][y]
                 x += deltaX
                 y += deltaY
@@ -55,7 +53,7 @@ def p2(): #not done
 
 def p1():
     width = 1
-    num = DAY3INPUT
+    num = day3InputInt
     while True:
         if width * width >= num:
             break
@@ -68,3 +66,6 @@ def p1():
     #       hauteur        + largeur
     return (width - 1) / 2 + abs(squareCpt - (width - 1) / 2 - num)
 
+
+day3Input = open("day3/input.txt", "r").read()
+day3InputInt = int(day3Input)

@@ -1,7 +1,7 @@
-DAY6INPUT = "10	3	15	10	5	15	5	15	9	2	5	8	5	2	3	6"
+import sys
 
 def p2():
-    rayInput = DAY6INPUT
+    rayInput = day6Input
     input = []
     inputSow = []
     for number in rayInput.split('\t'):
@@ -25,7 +25,7 @@ def p2():
                 input[index] = input[index] + 1
 
 def p1():
-    rayInput = DAY6INPUT
+    rayInput = day6Input
     input = []
     inputSow = []
     for number in rayInput.split('\t'):
@@ -47,3 +47,5 @@ def p1():
                 maxi = sys.maxint
             else:
                 input[index] = input[index] + 1
+
+day6Input = open("day6/input.txt", "r").read()
