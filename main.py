@@ -2,4 +2,3 @@
 import day9.main as prob
 
 print prob.p1()
-print prob.p2()

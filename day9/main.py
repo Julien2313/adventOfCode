@@ -57,5 +57,4 @@ def day9Recur(day9Input, index, score):
 def p1():
     return day9Recur(day9Input, 1, 0)[0]
 
-day9Txt = open("day9/input.txt", "r")
-day9Input = day9Txt.read()
+day9Input = open("day9/input.txt", "r").read()
