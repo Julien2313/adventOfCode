@@ -24,28 +24,26 @@ def p2():
         distances.append((abs(x) + abs(y) + abs(z)) / 2)
     return max(distances)
 
+def p2_():
+    positions = [0, 0, 0]
+    distances = []
+    directions = {'n':(0, 1, -1), 's':(0, -1, 1), 'nw':(-1, 1, 0), 'sw':(-1, 0, 1), 'ne':(1, 0, -1), 'se':(1, -1, 0)}
+    for step in day11Input.split(','):
+        pos = []
+        [pos.append(x + y) for x, y in zip(positions, directions[step])]
+        positions = list(pos)
+        distances.append((abs(positions[0]) + abs(positions[1]) + abs(positions[2])) / 2)
+    return max(distances)
+
 
 def p1_():
-    x = y = 0.0
+    positions = [0, 0, 0]
+    directions = {'n':(0, 1, -1), 's':(0, -1, 1), 'nw':(-1, 1, 0), 'sw':(-1, 0, 1), 'ne':(1, 0, -1), 'se':(1, -1, 0)}
     for step in day11Input.split(','):
-        if  step == "n":
-            y += 1
-        elif step == "s":
-            y -= 1
-        elif step == "nw":
-            x += 0.5
-            y -= 0.5
-        elif step == "sw":
-            x -= 0.5
-            y -= 0.5
-        elif step == "ne":
-            x += 0.5
-            y += 0.5
-        elif step == "se":
-            x -= 0.5
-            y += 0.5
-
-    return abs(x + y)
+        pos = []
+        [pos.append(x + y) for x, y in zip(positions, directions[step])]
+        positions = list(pos)
+    return ((abs(positions[0]) + abs(positions[1]) + abs(positions[2])) / 2)
 
 def p1():
     x = y = z = 0
