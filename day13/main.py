@@ -6,7 +6,7 @@ def p1():
         firewalls.append([int(depth), int(range)])
 
     for firewall in firewalls:
-        if firewall[0] % (2*(firewall[1]-1))==0:
+        if firewall[0] % (2*(firewall[1]-1)) == 0:
             picoSec += firewall[1] * firewall[0]
 
     return picoSec
