@@ -9,8 +9,8 @@ def p1():
     return cpt
 
 def p2CheckGroup(x, y, grille):
-    if grille[x][y] == 1:
-        grille[x][y] = 0
+    if grille[x][y]:
+        grille[x][y] = False
         if x > 0:
             p2CheckGroup(x - 1, y, grille)
         if y > 0:
@@ -27,14 +27,14 @@ def p2():
         binar = bin(int(chaine, 16))[2:].zfill(4*len(chaine))
         for digit in xrange(0, 128):
             if binar[digit] == '0':
-                grille[x][digit] = 0
+                grille[x][digit] = False
             else:
-                grille[x][digit] = 1
+                grille[x][digit] = True
 
     group = 0
     for x in xrange(0, 128):
         for y in xrange(0, 128):
-            if grille[x][y] == 1:
+            if grille[x][y]:
                 group += 1
                 p2CheckGroup(x, y, grille)
     return group
