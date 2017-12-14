@@ -32,7 +32,6 @@ def p2(chaine = None):
     return hash
 
 def p1():
-
     tabNumber = list(range(256))
 
     currentPos = 0
