@@ -1,8 +1,12 @@
 
-def p2():
+def p2(chaine = None):
     lengths = []
-    for x in xrange(0, len(day10Input) - 1):
-        lengths.append(ord(day10Input[x]))
+    if chaine == None:
+        for x in xrange(0, len(day10Input)):
+            lengths.append(ord(day10Input[x]))
+    else:
+        for x in xrange(0, len(chaine)):
+            lengths.append(ord(chaine[x]))
 
     lengths += [17, 31, 73, 47, 23]
     tabNumber = list(range(256))
@@ -25,7 +29,6 @@ def p2():
         for j in range(15):
             numDec ^= tabNumber[i * 16 + j]
         hash += hex(numDec)[2:].zfill(2)
-
     return hash
 
 def p1():
@@ -47,4 +50,4 @@ def p1():
 
     return tabNumber[0] * tabNumber[1]
 
-day10Input = open("day10/input.txt", "r").read()
+day10Input = open("day10/input.txt", "r").read().strip()

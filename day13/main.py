@@ -2,8 +2,7 @@ def p1():
     firewalls = []
     picoSec = 0
     for firewall in day13Input.splitlines():
-        depth, range = firewall.split(': ')
-        firewalls.append([int(depth), int(range)])
+        firewalls.append(map(int,firewall.split(': ')))
 
     for firewall in firewalls:
         if firewall[0] % (2*(firewall[1]-1)) == 0:
@@ -15,9 +14,9 @@ def p2():
     firewalls = []
     picoSecDelay = 0
     found = False
+
     for firewall in day13Input.splitlines():
-        depth, range = firewall.split(': ')
-        firewalls.append([int(depth), int(range)])
+        firewalls.append(map(int,firewall.split(': ')))
 
     while not found:
         found = True
