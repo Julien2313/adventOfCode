@@ -1,9 +1,9 @@
 #http://adventofcode.com/2017/
 import time
-import day14.main as prob
+import day15.main as prob
 
 START = time.time()
-print prob.p1()
-print prob.p2()
-
+print prob.p1_()
+print prob.p2_()
 print "Time Taken:", time.time() - START
+
