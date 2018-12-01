@@ -1,6 +1,6 @@
 def p2():
     freq=0
-    freqs={freq}
+    freqs=set([freq])
     while True:
         for data in dayInput.splitlines():
             freq += int(data)
