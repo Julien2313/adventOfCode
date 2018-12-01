@@ -1,6 +1,6 @@
 # http://adventofcode.com/2017
 
-Let's try to solve the problems with some elegants ways.
+Let's try to solve the problems with some elegants ways (or not).
 
 ## How to use is
 * Put your input in dailyFolder/input.txt
