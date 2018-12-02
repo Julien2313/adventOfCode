@@ -15,5 +15,5 @@ def p1():
         freq += int(data)
     return freq
 
-dayTxt = open("day1/input.txt", "r")
-dayInput = dayTxt.read().strip()
+dayFile = open("day1/input.txt", "r")
+dayInput = dayFile.read().strip()
