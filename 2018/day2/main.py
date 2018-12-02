@@ -8,14 +8,14 @@ def p2():
         for line2 in dayInput.splitlines()[cptLine:]:
             diffs = zip(line, line2)
             cpt=0
-            for str1, str2 in diffs:
-                if str1 != str2:
+            for char1, char2 in diffs:
+                if char1 != char2:
                     cpt+=1
             if cpt == 1:
                 txt=""
-                for str1, str2 in diffs:
-                    if str1 == str2:
-                        txt+=str1
+                for char1, char2 in diffs:
+                    if char1 == char2:
+                        txt+=char1
                 return txt
                 
 def p1():
