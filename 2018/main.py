@@ -1,6 +1,6 @@
 #http://adventofcode.com/2018/
 import time
-import day2.main as prob
+import day3.main as prob
 
 START = time.time()
 print(prob.p1())

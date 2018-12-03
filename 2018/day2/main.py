@@ -1,4 +1,3 @@
-import sys
 from collections import Counter
 
 def p2():
@@ -17,7 +16,7 @@ def p2():
                     if char1 == char2:
                         txt+=char1
                 return txt
-                
+
 def p1():
     cpt2 = 0
     cpt3 = 0
