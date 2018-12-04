@@ -1,11 +1,9 @@
-from collections import Counter
-
 X = 1000
 Y = 1000
 
 def p2():
     playground = [[0 for x in xrange(X)] for y in xrange(Y)]
-    allIDs = [x+1 for x in xrange(1293)]
+    allIDs = [x+1 for x in xrange(len(dayInput.splitlines()))]
     for line in dayInput.splitlines():
         ID = int(line.split(' ')[0][1:])
         x1 = int(line.split(' ')[2].split(',')[0])
