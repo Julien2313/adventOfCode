@@ -15,14 +15,14 @@ def p2():
             lineShort = data
             break
 
-    for x in string.ascii_lowercase[:26]:
-        data = lineShort.replace(x, "").replace(x.upper(), "")
+    for charToBeChecked in string.ascii_lowercase[:26]:
+        data = lineShort.replace(charToBeChecked, "").replace(charToBeChecked.upper(), "")
         while True:
             lenBefore = len(data)
-            for x in string.ascii_lowercase[:26]:
-                couple = x+x.upper()
+            for char in string.ascii_lowercase[:26]:
+                couple = char+char.upper()
                 data = data.replace(couple, "")
-                couple = x.upper()+x
+                couple = char.upper()+char
                 data = data.replace(couple, "")
 
             if lenBefore == len(data):
@@ -35,10 +35,10 @@ def p1():
     data = dayInput
     while True:
         lenBefore = len(data)
-        for x in string.ascii_lowercase[:26]:
-            couple = x+x.upper()
+        for char in string.ascii_lowercase[:26]:
+            couple = char+char.upper()
             data = data.replace(couple, "")
-            couple = x.upper()+x
+            couple = char.upper()+char
             data = data.replace(couple, "")
 
         if lenBefore == len(data):
