@@ -1,6 +1,6 @@
 #http://adventofcode.com/2018/
 import time
-import day4.main as prob
+import day5.main as prob
 
 
 

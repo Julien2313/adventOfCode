@@ -101,6 +101,7 @@ def p1():
             maxCpt = minute
             maxMinute = cpt
         cpt+=1
+    print int(guardMax), maxMinute
     return int(guardMax) * maxMinute
 
 dayFile = open("day4/input.txt", "r")
