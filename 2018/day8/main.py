@@ -1,53 +1,51 @@
+def recurp2(data):
+    nbrChild = data[0]
+    nbrRef = data[1]
 
-def recur2(data):
-    child, metadada = data[:2]
-    data = data[2:]
-    scores = []
     tot = 0
-
-    for i in xrange(child):
-        totChild, score, data = recur2(data)
-        tot += totChild
-        scores.append(score)
-
-    tot += sum(data[:metadada])
-
-    if child == 0:
-        return tot, tot, data[metadada:]
-    else:
-        scoresChild = []
-        for child in data[:metadada]:
-            if child > 0 and child <= len(scores):
-                scoresChild.append(scores[child - 1])
-
-        score = sum(scoresChild)
-        
-        return tot, score, data[metadada:]
-
-def recur(data):
-    child = data[0]
-    nbrMetadada = data[1]
-
     data = data[2:]
-    tot = 0
+    
+    children = []
 
-    for i in xrange(child):
-        totChild, data = recur(data)
+    for child in xrange(nbrChild):
+        data, score = recurp2(data)
+        children.append(score)
+
+    if nbrChild == 0:
+        tot += sum(data[:nbrRef])
+        return data[nbrRef:], tot
+
+    tot=0
+    for child in data[:nbrRef]:
+        if child > 0 and child <= len(children):
+            tot += children[child-1]
+
+    return data[nbrRef:], tot
+
+def recurp1(data):
+    nbrChild = data[0]
+    nbrMetadata = data[1]
+
+    tot = 0
+    data = data[2:]
+
+    for child in xrange(nbrChild):
+        data, totChild = recurp1(data)
         tot += totChild
 
-    tot += sum(data[:nbrMetadada])
+    tot += sum(data[:nbrMetadata])
+    return data[nbrMetadata:], tot
 
-    return tot, data[nbrMetadada:]
 
 def p2():
     data = map(int,dayInput.split(' '))   
 
-    return recur2(data)[1]
+    return recurp2(data)[1]
 
 def p1():
     data = map(int,dayInput.split(' '))   
 
-    return recur(data)[0]
+    return recurp1(data)[1]
 
 tot = 0
 
