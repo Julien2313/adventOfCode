@@ -43,7 +43,7 @@ def p1():
 
         player = (player + 1) % nbrPlayers
 
-    return(max(scores))
+    return max(scores)
 
 dayFile = open("day9/input.txt", "r")
 dayInput = dayFile.read().strip()
