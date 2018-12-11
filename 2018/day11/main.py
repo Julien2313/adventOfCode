@@ -12,22 +12,25 @@ def p2():
             level = hundred - 5
             playground[x][y] = level
 
+
+    sums = [[0 for x in xrange(301)] for y in xrange(301)]
+    for x in xrange(1, 300):
+        for y in xrange(1, 300):
+            sums[x][y] = sums[x-1][y] + sums[x][y-1] - sums[x-1][y-1] + playground[x][y]
+
     maxi = 0
     X, Y, SIZE = 0, 0, 0
     for x in xrange(1, 301):
         for y in xrange(1, 301):
             maxSize = 300 - max(x, y)
-            totSubSize = 0
             for size in xrange(0, maxSize):
-                for dx in xrange(x, x+size):
-                    totSubSize += playground[dx][y+size]
-                totSubSize += sum(playground[x+size][y:y+size])
-                totSubSize += playground[x+size][y+size]
-                if totSubSize > maxi:
-                    maxi = totSubSize
+                area = sums[x-1][y-1] + sums[x+size][y+size] - sums[x-1][y+size] - sums[x+size][y-1] 
+                if area > maxi:
+                    maxi = area
                     X = x
                     Y = y
                     SIZE = size+1
+                    
     return (X, Y, SIZE)
 
 def p1():
