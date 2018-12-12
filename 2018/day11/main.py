@@ -9,9 +9,7 @@ def p2():
             powerLevel += serial
             powerLevel *= rackID
             hundred = (powerLevel//100)%10
-            level = hundred - 5
-            playground[x][y] = level
-
+            playground[x][y] = hundred - 5
 
     sums = [[0 for x in xrange(301)] for y in xrange(301)]
     for x in xrange(1, 300):
@@ -30,8 +28,8 @@ def p2():
                     X = x
                     Y = y
                     SIZE = size+1
-                    
-    return (X, Y, SIZE)
+
+    return str(X)+","+ str(Y)+","+ str(SIZE)
 
 def p1():
     playground = [[0 for x in xrange(301)] for y in xrange(301)]
@@ -44,8 +42,7 @@ def p1():
             powerLevel += serial
             powerLevel *= rackID
             hundred = (powerLevel//100)%10
-            level = hundred - 5
-            playground[x][y] = level
+            playground[x][y] = hundred - 5
     max = 0
     X, Y = 0, 0
     for x in xrange(1, 298):
@@ -57,7 +54,7 @@ def p1():
                 max = tot
                 X = x
                 Y = y
-    return (X, Y)
+    return str(X)+","+ str(Y)
 
 
 dayFile = open("day11/input.txt", "r")
