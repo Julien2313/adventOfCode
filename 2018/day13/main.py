@@ -9,172 +9,130 @@ def p2():
     for line in dayInput.splitlines():
         x = 0
         for char in line:
-            if char == "<" or char == ">" or char == "^" or char == "v":
-                carts.append([y, x, char, 0, ID])
-                ID += 1
-                if char == "<" or char == ">":
+            pos = x*1j+ y
+            if char in "<>^v":
+                if char == "<":
+                    dir = -1j + 0
+                elif char == "^":
+                    dir = 0j - 1
+                elif char == ">":
+                    dir = 1j + 0
+                else:
+                    dir = 0j + 1
+
+                carts.append([pos, dir, 0, ID])
+                if char in "<>":
                     char = "-"
                 else:
                     char = "|"
-                
-            road[(x, y)] = char
+                ID+=1
+            
+            road[pos] = char
             x += 1
         y += 1
-    # for y in xrange(150):
-    #     print ''.join([road[(x, y)] for x in xrange(150)])
-
+        
     while True:
+        # for y in xrange(150):
+        #     print ''.join([road[x*1j+y] if not any([cart[0] == x*1j+y for cart in carts]) else "*" for x in xrange(150)])
+
         for cart in carts:
             if cart in crashed:
                 continue
-            
-            if cart[2] == ">":
-                cart[1]+=1
-            elif cart[2] == "<":
-                cart[1]-=1
-            elif cart[2] == "v":
-                cart[0]+=1
-            elif cart[2] == "^":
-                cart[0]-=1
-
-            if road[(cart[1], cart[0])] == "+":
-                if cart[3] % 3 == 0:
-                    if cart[2] == ">":
-                        cart[2] = "^"
-                    elif cart[2] == "<":
-                        cart[2] = "v"
-                    elif cart[2] == "v":
-                        cart[2] = ">"
-                    elif cart[2] == "^":
-                        cart[2] = "<"
-
-                if cart[3] % 3 == 2:
-                    if cart[2] == ">":
-                        cart[2] = "v"
-                    elif cart[2] == "<":
-                        cart[2] = "^"
-                    elif cart[2] == "v":
-                        cart[2] = "<"
-                    elif cart[2] == "^":
-                        cart[2] = ">"
-                cart[3] += 1
-            elif road[(cart[1], cart[0])] == "\\" or road[(cart[1], cart[0])] == "/":
-                if cart[2] == ">":
-                    if road[(cart[1], cart[0])] == "\\":
-                        cart[2] = "v"
-                    else:
-                        cart[2] = "^"
-                elif cart[2] == "<":
-                    if road[(cart[1], cart[0])] == "\\":
-                        cart[2] = "^"
-                    else:
-                        cart[2] = "v"
-                elif cart[2] == "^":
-                    if road[(cart[1], cart[0])] == "\\":
-                        cart[2] = "<"
-                    else:
-                        cart[2] = ">"
-                elif cart[2] == "v":
-                    if road[(cart[1], cart[0])] == "\\":
-                        cart[2] = ">"
-                    else:
-                        cart[2] = "<"
+            cart[0] += cart[1]
+            if road[cart[0]] == "+":
+                if cart[2] % 3 == 0:
+                    cart[1] *= 1j
+                if cart[2] % 3 == 2:
+                    cart[1] *= -1j
+                cart[2] += 1
+            elif road[cart[0]] == "\\":
+                if cart[1].real != 0:
+                    cart[1] *= 1j
+                else:
+                    cart[1] *= -1j
+            elif road[cart[0]] == "/":
+                if cart[1].real != 0:
+                    cart[1] *= -1j
+                else:
+                    cart[1] *= 1j
 
             for cart2 in carts:
                 if cart2 in crashed:
                     continue
                 if cart2 == cart:
                     continue
-                if cart[0] == cart2[0] and cart[1] == cart2[1]:# and cart[2] != cart2[2]:
+                if cart[0] == cart2[0]:
                     crashed.append(cart)
                     crashed.append(cart2)
                     break
-        carts.sort()
+
+        carts.sort(key=lambda x:x[0].imag*1000+x[0].real)
+
         if len(carts) - len(crashed) == 1:
             for cart in carts:
                 if cart in crashed:
                     continue
-                return str(cart[1])+","+str(cart[0])
+                return str(int(cart[0].imag))+","+str(int(cart[0].real))
 
 def p1():
     carts = []
     road = defaultdict(str)
     y = 0
+    ID = 0
     for line in dayInput.splitlines():
         x = 0
         for char in line:
-            if char == "<" or char == ">" or char == "^" or char == "v":
-                carts.append([y, x, char, 0])
-                if char == "<" or char == ">":
+            pos = x*1j+ y
+            if char in "<>^v":
+                if char == "<":
+                    dir = -1j + 0
+                elif char == "^":
+                    dir = 0j - 1
+                elif char == ">":
+                    dir = 1j + 0
+                else:
+                    dir = 0j + 1
+
+                carts.append([pos, dir, 0, ID])
+                if char in "<>":
                     char = "-"
                 else:
                     char = "|"
-                
-            road[(x, y)] = char
+                ID+=1
+            
+            road[pos] = char
             x += 1
         y += 1
         
     while True:
+        # for y in xrange(7):
+        #     print ''.join([road[x*1j+y] if not any([cart[0] == x*1j+y for cart in carts]) else "*" for x in xrange(15)])
         for cart in carts:
-            if cart[2] == ">":
-                cart[1]+=1
-            elif cart[2] == "<":
-                cart[1]-=1
-            elif cart[2] == "v":
-                cart[0]+=1
-            elif cart[2] == "^":
-                cart[0]-=1
+            cart[0] += cart[1]
 
-            if road[(cart[1], cart[0])] == "+":
-                if cart[3] % 3 == 0:
-                    if cart[2] == ">":
-                        cart[2] = "^"
-                    elif cart[2] == "<":
-                        cart[2] = "v"
-                    elif cart[2] == "v":
-                        cart[2] = ">"
-                    elif cart[2] == "^":
-                        cart[2] = "<"
-
-                if cart[3] % 3 == 2:
-                    if cart[2] == ">":
-                        cart[2] = "v"
-                    elif cart[2] == "<":
-                        cart[2] = "^"
-                    elif cart[2] == "v":
-                        cart[2] = "<"
-                    elif cart[2] == "^":
-                        cart[2] = ">"
-                cart[3] += 1
-
-            elif road[(cart[1], cart[0])] == "\\" or road[(cart[1], cart[0])] == "/":
-                if cart[2] == ">":
-                    if road[(cart[1], cart[0])] == "\\":
-                        cart[2] = "v"
-                    else:
-                        cart[2] = "^"
-                elif cart[2] == "<":
-                    if road[(cart[1], cart[0])] == "\\":
-                        cart[2] = "^"
-                    else:
-                        cart[2] = "v"
-                elif cart[2] == "^":
-                    if road[(cart[1], cart[0])] == "\\":
-                        cart[2] = "<"
-                    else:
-                        cart[2] = ">"
-                elif cart[2] == "v":
-                    if road[(cart[1], cart[0])] == "\\":
-                        cart[2] = ">"
-                    else:
-                        cart[2] = "<"
+            if road[cart[0]] == "+":
+                if cart[2] % 3 == 0:
+                    cart[1] *= 1j
+                if cart[2] % 3 == 2:
+                    cart[1] *= -1j
+                cart[2] += 1
+            elif road[cart[0]] == "\\":
+                if cart[1].real != 0:
+                    cart[1] *= 1j
+                else:
+                    cart[1] *= -1j
+            elif road[cart[0]] == "/":
+                if cart[1].real != 0:
+                    cart[1] *= -1j
+                else:
+                    cart[1] *= 1j
 
             for cart2 in carts:
                 if cart2 == cart:
                     continue
-                if cart[0] == cart2[0] and cart[1] == cart2[1]:
-                    return str(cart[1])+","+str(cart[0])
-        carts.sort()
+                if cart[0] == cart2[0]:
+                    return str(int(cart[0].imag))+","+str(int(cart[0].real))
+        carts.sort(key=lambda x:x[0].imag*1000+x[0].real)
 
 dayFile = open("day13/input.txt", "r")
 dayInput = dayFile.read()
