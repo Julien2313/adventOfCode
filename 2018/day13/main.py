@@ -1,5 +1,19 @@
 from collections import defaultdict
 
+def turn(char, dir):
+    if char == "\\":
+        if dir.real != 0:
+            dir *= 1j
+        else:
+            dir *= -1j
+    elif char == "/":
+        if dir.real != 0:
+            dir *= -1j
+        else:
+            dir *= 1j
+    return dir
+
+
 def p2():
     carts = []
     crashed = []
@@ -39,22 +53,15 @@ def p2():
             if cart in crashed:
                 continue
             cart[0] += cart[1]
+
             if road[cart[0]] == "+":
                 if cart[2] % 3 == 0:
                     cart[1] *= 1j
                 if cart[2] % 3 == 2:
                     cart[1] *= -1j
                 cart[2] += 1
-            elif road[cart[0]] == "\\":
-                if cart[1].real != 0:
-                    cart[1] *= 1j
-                else:
-                    cart[1] *= -1j
-            elif road[cart[0]] == "/":
-                if cart[1].real != 0:
-                    cart[1] *= -1j
-                else:
-                    cart[1] *= 1j
+            else :
+                cart[1] = turn(road[cart[0]], cart[1])
 
             for cart2 in carts:
                 if cart2 in crashed:
@@ -103,7 +110,7 @@ def p1():
             road[pos] = char
             x += 1
         y += 1
-        
+
     while True:
         # for y in xrange(7):
         #     print ''.join([road[x*1j+y] if not any([cart[0] == x*1j+y for cart in carts]) else "*" for x in xrange(15)])
@@ -116,16 +123,8 @@ def p1():
                 if cart[2] % 3 == 2:
                     cart[1] *= -1j
                 cart[2] += 1
-            elif road[cart[0]] == "\\":
-                if cart[1].real != 0:
-                    cart[1] *= 1j
-                else:
-                    cart[1] *= -1j
-            elif road[cart[0]] == "/":
-                if cart[1].real != 0:
-                    cart[1] *= -1j
-                else:
-                    cart[1] *= 1j
+            else :
+                cart[1] = turn(road[cart[0]], cart[1])
 
             for cart2 in carts:
                 if cart2 == cart:
