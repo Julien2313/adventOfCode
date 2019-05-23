@@ -48,3 +48,11 @@ Temporary Items
 *.pyc
 .idea
 .idea/workspace.xml
+
+
+#Added by cargo
+#
+#already existing elements are commented out
+
+/target
+**/*.rs.bk

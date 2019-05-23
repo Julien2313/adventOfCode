@@ -1,0 +1,7 @@
+[package]
+name = "adventOfCode"
+version = "0.1.0"
+authors = ["julien2313 <julien@lorang.net>"]
+edition = "2018"
+
+[dependencies]

@@ -4,10 +4,10 @@ def p2():
     while True:
         for data in dayInput.splitlines():
             freq += int(data)
+            test+=1
             if freq in freqs:
                 return freq
-            else:
-                freqs.add(freq)
+            freqs.add(freq)
 
 def p1():
     freq=0
