@@ -1,15 +1,14 @@
 use std::collections::HashSet;  
 
-pub fn p1(input: &String) {
+pub fn p1(input: &String) -> i32 {
     let mut freq:i32 = 0;
-
     for line in input.lines() {
         freq += line.parse::<i32>().expect("Bad number");
     }
-    println!("{}", freq);
+    return freq
 }
 
-pub fn p2(input: &String) {
+pub fn p2(input: &String) -> i32 {
     let mut freqs_seen = HashSet::new();
     let mut freq_curr:i32 = 0;
 
@@ -24,8 +23,7 @@ pub fn p2(input: &String) {
         for freq in &freqs {
             freq_curr += freq;
             if freqs_seen.contains(&freq_curr) {
-                println!("{}", freq_curr);
-                return
+                return freq_curr
             }
             freqs_seen.insert(freq_curr);
         } 
